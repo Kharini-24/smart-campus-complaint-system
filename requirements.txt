@@ -8,5 +8,5 @@ pydantic-settings>=2.5.0
 email-validator>=2.2.0
 python-multipart>=0.0.9
 cloudinary>=1.46.0
-torch>=2.14.0
+torch==2.14.0+cpu
 transformers>=5.0.0
