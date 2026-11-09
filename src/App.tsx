@@ -7,6 +7,8 @@ import SubmitComplaintPage from '@/pages/SubmitComplaintPage';
 import MyComplaintsPage from '@/pages/MyComplaintsPage';
 import StaffDashboard from '@/pages/StaffDashboard';
 import AdminDashboard from '@/pages/AdminDashboard';
+import StudentServicesPage from '@/pages/StudentServicesPage';
+import AIAssistantPage from '@/pages/AIAssistantPage';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/staff/complaints" element={<StaffDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/users" element={<AdminDashboard />} />
+        <Route path="/student/services" element={<StudentServicesPage />} />
+        <Route path="/student/assistant" element={<AIAssistantPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -13,6 +13,7 @@ class UserRegister(BaseModel):
     email: EmailStr
     password: str = Field(min_length=6, max_length=128)
     student_id: str = Field(min_length=1, max_length=50)
+    registration_code: str = Field(min_length=6, max_length=64)
 
 
 class UserLogin(BaseModel):
@@ -27,6 +28,7 @@ class UserResponse(BaseModel):
     role: str
     student_id: Optional[str] = None
     department: Optional[str] = None
+    college_id: Optional[str] = None
     created_at: str
 
 

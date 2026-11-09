@@ -13,6 +13,7 @@ export default function RegisterPage() {
     name: '',
     email: '',
     studentId: '',
+    registrationCode: '',
     password: '',
     confirmPassword: '',
   });
@@ -31,8 +32,14 @@ export default function RegisterPage() {
 
     setSubmitting(true);
     try {
-      await register(form.name, form.email, form.password, form.studentId);
-      navigate('/student');
+      await register(
+        form.name,
+        form.email,
+        form.password,
+        form.studentId,
+        form.registrationCode
+      );
+      navigate('/student/services');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Registration failed');
     } finally {
@@ -127,6 +134,20 @@ export default function RegisterPage() {
                   />
                 </div>
               </div>
+
+                          <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">
+                College Registration Code
+              </label>
+              <input
+                type="text"
+                value={form.registrationCode}
+                onChange={(e) => handleChange('registrationCode', e.target.value)}
+                placeholder="Enter your college registration code"
+                required
+                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-teal-500"
+              />
+            </div>
 
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1.5">

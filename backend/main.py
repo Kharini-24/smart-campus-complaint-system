@@ -14,6 +14,7 @@ from backend.routes.complaints import router as complaints_router
 from backend.routes.admin import router as admin_router
 from backend.routes.uploads import router as uploads_router
 from backend.routes.feedback import router as feedback_router
+from backend.routes.rag import router as rag_router
 
 app = FastAPI(
     title="Smart Campus Complaint Management System",
@@ -34,6 +35,7 @@ app.include_router(complaints_router)
 app.include_router(admin_router)
 app.include_router(uploads_router)
 app.include_router(feedback_router)
+app.include_router(rag_router)
 
 @app.on_event("startup")
 async def startup_db_client():
@@ -42,11 +44,17 @@ async def startup_db_client():
         print("WARNING: Could not connect to MongoDB — check MONGODB_URI")
     else:
         print("MongoDB connection established")
-        # Ensure unique index on users.email
-        collections = get_collections()
-        await collections["users"].create_index("email", unique=True)
+            # Ensure unique index on users.email
+    collections = get_collections()
+    await collections["users"].create_index("email", unique=True)
 
-
+    # Ensure student IDs are unique within each college
+    await collections["users"].create_index(
+        [("college_id", 1), ("student_id", 1)],
+        unique=True,
+        partialFilterExpression={"role": "student"},
+        name="unique_student_id_per_college"
+    )
 @app.get("/api/health")
 async def health_check():
     db_ok = await ping_database()

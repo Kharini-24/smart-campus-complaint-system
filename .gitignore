@@ -30,3 +30,16 @@ backend/ml_model/
 # Python cache files
 __pycache__/
 *.py[cod]
+# Python virtual environment
+.venv/
+venv/
+
+# Python testing and cache
+.pytest_cache/
+*.pyc
+
+# Generated RAG storage
+backend/rag_storage/
+
+# Temporary test scripts
+test_*.py

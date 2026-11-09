@@ -19,7 +19,7 @@ export default function LoginPage() {
     setSubmitting(true);
     try {
       const user = await login(email, password);
-      if (user.role === 'student') navigate('/student');
+      if (user.role === 'student') navigate('/student/services');
       else if (user.role === 'staff') navigate('/staff');
       else navigate('/admin');
     } catch (err) {

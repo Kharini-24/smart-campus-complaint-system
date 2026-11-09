@@ -72,6 +72,7 @@ export const api = {
       email: string;
       password: string;
       student_id: string;
+      registration_code: string;
     },
   ) =>
     request<{
@@ -98,6 +99,24 @@ export const api = {
 
   me: () =>
     request<AuthUser>('/auth/me'),
+  
+   
+  // --------------------------------------------------
+  // AI Campus Assistant (RAG)
+  // --------------------------------------------------
+
+  askRag: (question: string) =>
+  request<{
+    answer: string;
+    sources: {
+      document_name: string;
+      page_number: number;
+      similarity_score: number;
+    }[];
+  }>('/rag/ask', {
+    method: 'POST',
+    body: JSON.stringify({ question }),
+  }),
 
   // --------------------------------------------------
   // Student Complaints

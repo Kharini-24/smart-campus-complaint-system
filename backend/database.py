@@ -58,4 +58,5 @@ def get_collections():
         "users": db["users"],
         "complaints": db["complaints"],
         "feedback": db["feedback"],
+        "college_registration_codes": db["college_registration_codes"],
     }

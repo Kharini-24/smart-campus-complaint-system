@@ -5,7 +5,13 @@ interface AuthContextValue {
   user: AuthUser | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<AuthUser>;
-  register: (name: string, email: string, password: string, studentId: string) => Promise<AuthUser>;
+  register: (
+    name: string,
+    email: string,
+    password: string,
+    studentId: string,
+    registrationCode: string
+  ) => Promise<AuthUser>;
   logout: () => void;
 }
 
@@ -40,10 +46,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     email: string,
     password: string,
     studentId: string,
+    registrationCode: string,
   ): Promise<AuthUser> => {
     setLoading(true);
     try {
-      const data = await api.register({ name, email, password, student_id: studentId });
+      const data = await api.register({
+        name,
+        email,
+        password,
+        student_id: studentId,
+        registration_code: registrationCode,
+      });
       setToken(data.access_token);
       setStoredUser(data.user);
       setUser(data.user);
